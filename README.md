@@ -18,21 +18,17 @@ Kubernetes is an open-source system for automating deployment, scaling, and mana
 - Kubernetes is not compatible with Amazon's EC2 Container Service. However, the underlying docker container architecture is fully supported. 
 
 
-### Generate secret for sensitive information
 
-Please update the values below and run. 
-
+### Quickstart
 ```
-if [ ! -d secret ]; then
-    mkdir secret;
-fi;
+gcloud config set project GCE_PROJECT_ID
+gcloud config set compute/zone us-central1-c
+gcloud container clusters create GCE_PROJECT_ID
 
-echo 'USERNAME' > secret/spring.datasource.username
-echo 'PASWORD' > secret/spring.datasource.password
-echo 'jdbc:mysql://chhs-mysql:3306/DBNAME?characterEncoding=UTF-8' > secret/spring.datasource.url
-echo 'mysql.root.password' > secret/mysql.root.password
+kubectl create secret generic chhs --from-literal=spring.datasource.username=USERNAME --from-literal=spring.datasource.password=PASSWORD --from-literal=spring.datasource.url=jdbc:mysql://DB_HOSTNAME:3306/DB_NAME
 
-kubectl create secret generic chhs --from-file=secret
+kubectl create -f frontend-controller.yml
+kubectl create -f backend-controller.yml
+kubectl create -f frontend-service.yml
+kubectl create -f backend-service.yml
 ```
-
-# chhs-kubernetes
