@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    name: chhs
+    tier: frontend
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: chhs
+        tier: frontend
+    spec:
+      containers:
+      - image: portlandwebworks/chhs-frontend:latest
+        name: webapp
+        ports:
+        - containerPort: 8080
+        env:
+          - name: BACKEND_URL
+            value: http://backend-service:8090
