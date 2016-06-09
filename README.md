@@ -1,7 +1,8 @@
 # cchs-kubernetes-demo 
 
+WARNING: This repository is no longer maintained and the code has been merged into https://github.com/portlandwebworks/chhs-prototype
 
-
+## Overview
 Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications.
 
 ## Advantages
